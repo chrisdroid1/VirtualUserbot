@@ -4,9 +4,9 @@ import sys
 
 import git
 
-from virtualuserbot.Configs import Config
+from firebot.Configs import Config
 
-from ..utils import friday_on_cmd as lightning_cmd
+from ..utils import fire_on_cmd as thunder_cmd
 
 # -- Constants -- #
 IS_SELECTED_DIFFERENT_BRANCH = (
@@ -17,7 +17,7 @@ IS_SELECTED_DIFFERENT_BRANCH = (
 )
 OFFICIAL_UPSTREAM_REPO = Config.UPSTREAM_REPO
 BOT_IS_UP_TO_DATE = (
-    "Yaour userbot >> is up-to-date<< \nIt is recommended to use @FridayOT."
+    "Your userbot >> is up-to-date<<."
 )
 NEW_BOT_UP_DATE_FOUND = (
     "New Update Found For {branch_name}\n"
@@ -36,7 +36,7 @@ RESTARTING_APP = "`Re-starting heroku application`"
 # -- Constants End -- #
 
 
-@borg.on(lightning_cmd("update", outgoing=True))
+@borg.on(thunder_cmd("update", outgoing=True))
 async def updater(message):
     try:
         repo = git.Repo()
@@ -149,6 +149,6 @@ async def deploy_start(tgbot, message, refspec, remote):
     await message.edit(
         "**UpdatinG Your ubot sir!!!\nPlease WaiT FoR 5-10 mins, modules are loading after that type `.alive` to check if I am On**🤗😅"
     )
-    await remote.push(refspec=refspec)
+    remote.push(refspec=refspec)
     await tgbot.disconnect()
     os.execl(sys.executable, sys.executable, *sys.argv)
